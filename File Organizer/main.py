@@ -1,32 +1,41 @@
 import os
 import shutil
 
-source_directory = (r"C:\Users\USER\Downloads")
-destination_base = (r"C:\Users\USER\Documents")
+def organize_files(source_dir, destination_base):
+  """
+  Organizes files from source directory to subfolders in destination based on extension.
 
-extension_to_folder = {
-    ".txt": "TextFiles",
-    ".docx": "WordFiles",
-    ".pptx": "PowerPointFiles",
-    ".jpg": "Images",
-    ".png": "images",
-    ".gif": "images",
-    ".pdf": "PDFs",
-}
+  Args:
+      source_dir: Path to the directory containing files to be organized.
+      destination_base: Path to the base directory for creating subfolders.
+  """
+  extension_mappings = {
+      ".txt": "TextFiles",
+      ".docx": "WordFiles",
+      ".pptx": "PowerPointFiles",
+      ".pdf": "PDFs",
+      ".zip": "ZIPs",
+      ".jpg": "Pictures",
+      ".png": "Pictures",
+      ".gif": "Pictures",
+      ".mp4": "Vid",
+  }
+  other_folder = "Other"
 
-for filename in os.listdir(source_directory):
-    source_path = os.path.join(source_directory, filename)
-    
+  for filename in os.listdir(source_dir):
+    source_path = os.path.join(source_dir, filename)
 
     if os.path.isfile(source_path):
-      
-        _, file_extension = os.path.splitext(filename)
-        
-        destination_folder = extension_to_folder.get(file_extension, "Other")
-        
-        destination_path = os.path.join(destination_base, destination_folder)
-        os.makedirs(destination_path, exist_ok=True)
-        
-        shutil.move(source_path, os.path.join(destination_path, filename))
+      _, file_extension = os.path.splitext(filename)
+      destination_folder = extension_mappings.get(file_extension.lower(), other_folder)
+      destination_path = os.path.join(destination_base, destination_folder)
+      os.makedirs(destination_path, exist_ok=True)
 
-print("File organization completed bossing.")
+      shutil.move(source_path, os.path.join(destination_path, filename))
+
+  print("Tapulan")
+
+# Example usage with user input
+source_dir = input("Enter the source directory path: ")
+destination_base = input("Enter the destination directory path: ")
+organize_files(source_dir, destination_base)
