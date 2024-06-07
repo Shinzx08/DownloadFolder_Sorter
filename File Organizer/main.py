@@ -2,13 +2,6 @@ import os
 import shutil
 
 def organize_files(source_dir, destination_base):
-  """
-  Organizes files from source directory to subfolders in destination based on extension.
-
-  Args:
-      source_dir: Path to the directory containing files to be organized.
-      destination_base: Path to the base directory for creating subfolders.
-  """
   extension_mappings = {
       ".txt": "TextFiles",
       ".docx": "WordFiles",
@@ -35,7 +28,6 @@ def organize_files(source_dir, destination_base):
 
   print("Tapulan")
 
-# Example usage with user input
 source_dir = input("Enter the source directory path: ")
 destination_base = input("Enter the destination directory path: ")
 organize_files(source_dir, destination_base)
